@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "events")
 public class Event extends BaseEntity{
 
-    @Column(name = "time", nullable = false)
+    @Column(name = "event_time", nullable = false)
     private String time; //просто время
     @Column(name = "car_number", nullable = true)
     private int carNumber;

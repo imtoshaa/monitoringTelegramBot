@@ -5,11 +5,11 @@ drop table if exists bot_monitoring.users;
 create table if not exists bot_monitoring.users
 (
     id            serial unique,
-    serial_number int unique,
+    serial_number varchar(5) unique,
     password      varchar(200),
     name          varchar(200),
     surname       varchar(200),
-    chatId        int,
+    chat_id        long,
     primary key (id)
 );
 
@@ -17,7 +17,7 @@ drop table if exists bot_monitoring.days;
 create table if not exists bot_monitoring.days
 (
     id   serial unique,
-    date date,
+    date varchar(200),
     primary key (id)
 );
 
@@ -25,8 +25,8 @@ drop table if exists bot_monitoring.events;
 create table if not exists bot_monitoring.events
 (
     id          serial unique,
-    date        time,
-    car_number  int unique,
+    event_time        varchar(8),
+    car_number  int,
     description varchar(1000),
     image_path  varchar(500),
     day_id      bigint unsigned,
@@ -37,3 +37,10 @@ create table if not exists bot_monitoring.events
         foreign key (user_id) references bot_monitoring.users (id) on update cascade
 
 );
+
+insert into bot_monitoring.users (serial_number, name, surname)
+    value (
+           43600,
+           'Дмитрий',
+           'Елисеев'
+    );

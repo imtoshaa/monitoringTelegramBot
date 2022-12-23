@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>by.telegram.monitoring</groupId>
 	<artifactId>bot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>MikashevichiBot</name>
 	<description>Monitoring Mikashevichi Service</description>
 	<properties>

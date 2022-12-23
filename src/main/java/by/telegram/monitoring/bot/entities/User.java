@@ -1,8 +1,11 @@
 package by.telegram.monitoring.bot.entities;
 
-import by.telegram.monitoring.bot.utils.PasswordConstraint;
 import by.telegram.monitoring.bot.utils.SerialNumberConstraint;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -17,18 +20,18 @@ import java.util.List;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    @Column(name = "serial_number", nullable = false)
+    @Column(name = "serial_number")
     @SerialNumberConstraint
-    private String sNumber;
-    @Column(name = "password", nullable = false)
-    @PasswordConstraint
+    private String serialNumber;
+    @Column(name = "password")
+//    @PasswordConstraint
     private String password;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
-    @Column(name = "surname", nullable = false)
+    @Column(name = "surname")
     private String surname;
-    @Column(name = "chatId", nullable = false)
-    private int chatId;
+    @Column(name = "chat_id")
+    private Long chatId;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @ToString.Exclude

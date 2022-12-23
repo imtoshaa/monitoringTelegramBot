@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "days")
 public class Day extends BaseEntity {
 
-    private Date date; //просто день
+    private String date; //просто день
 
     @OneToMany(mappedBy = "day", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @ToString.Exclude
