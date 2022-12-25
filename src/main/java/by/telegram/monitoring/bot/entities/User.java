@@ -32,6 +32,10 @@ public class User extends BaseEntity {
     private String surname;
     @Column(name = "chat_id")
     private Long chatId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
+    private Role role;
+
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @ToString.Exclude

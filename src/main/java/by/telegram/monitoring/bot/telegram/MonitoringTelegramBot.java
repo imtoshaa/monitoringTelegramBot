@@ -11,10 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
@@ -40,7 +39,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static by.telegram.monitoring.bot.utils.TelegramConstants.*;
+import static by.telegram.monitoring.bot.utils.constants.TelegramConstants.*;
 
 @Service
 @AllArgsConstructor
@@ -56,6 +55,8 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
     private EventRepository eventRepository;
     @Autowired
     private DayRepository dayRepository;
+    @Autowired
+    private PasswordEncoder encoder;
 
 
     private Event eventHolder;
@@ -84,11 +85,20 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
             }
         } else if (update.hasMessage()) {
             try {
-                handleTelegramCommands(update.getMessage());
-                handleStringsFromStaticKeyboard(update.getMessage());
-                handleCommandsFromKeyboard(update.getMessage());
+                if (userRepository.existsUserByChatId(update.getMessage().getChatId())) {
+                    handleTelegramCommands(update.getMessage());
+                    handleStringsFromStaticKeyboard(update.getMessage());
+                    handleCommandsFromKeyboard(update.getMessage());
+                    createGeneralStaticKeyboard(update.getMessage());
+                } else {
+                    execute(SendMessage.builder()
+                            .chatId(update.getMessage().getChatId())
+                            .text("Вы не зарегистрированы. Пройдите регистрацию.")
+                            .build());
+                    handleTelegramCommands(update.getMessage());
+                }
 
-                createGeneralStaticKeyboard(update.getMessage());
+
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -125,8 +135,17 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
                                 User user = userRepository.getUserBySerialNumber(serialNumber);
                                 if (user != null) {
                                     user.setChatId(message.getChatId());
-                                    user.setPassword(password);
+                                    user.setPassword(encoder.encode(password));
                                     userRepository.save(user);
+                                    execute(SendMessage.builder()
+                                            .chatId(message.getChatId())
+                                            .text("Вы успешно зарегистрированы!")
+                                            .build());
+                                } else {
+                                    execute(SendMessage.builder()
+                                            .chatId(message.getChatId())
+                                            .text("Вам не предоставлен доступ к данному боту!")
+                                            .build());
                                 }
                             }
                         } catch (Exception e) {

@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static by.telegram.monitoring.bot.utils.patterns.PatternConstants.PASSWORD_PATTERN;
+import static by.telegram.monitoring.bot.utils.constants.PatternConstants.PASSWORD_PATTERN;
 
 public class PasswordValidator implements ConstraintValidator<PasswordConstraint, String> {
 

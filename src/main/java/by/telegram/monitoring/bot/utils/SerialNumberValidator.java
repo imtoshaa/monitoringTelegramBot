@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static by.telegram.monitoring.bot.utils.patterns.PatternConstants.SERIAL_NUMBER_PATTERN;
+import static by.telegram.monitoring.bot.utils.constants.PatternConstants.SERIAL_NUMBER_PATTERN;
 
 public class SerialNumberValidator implements ConstraintValidator<SerialNumberConstraint, String> {
 

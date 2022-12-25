@@ -1,4 +1,4 @@
-package by.telegram.monitoring.bot.utils.patterns;
+package by.telegram.monitoring.bot.utils.constants;
 
 import lombok.experimental.UtilityClass;
 
