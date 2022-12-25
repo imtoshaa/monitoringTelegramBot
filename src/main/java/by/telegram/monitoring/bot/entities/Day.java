@@ -17,7 +17,7 @@ public class Day extends BaseEntity {
 
     private String date; //просто день
 
-    @OneToMany(mappedBy = "day", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "day", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Event> events;
 }

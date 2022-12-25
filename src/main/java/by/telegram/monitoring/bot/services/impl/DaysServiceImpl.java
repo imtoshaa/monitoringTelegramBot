@@ -1,8 +1,8 @@
 package by.telegram.monitoring.bot.services.impl;
 
-import by.telegram.monitoring.bot.entities.Event;
-import by.telegram.monitoring.bot.repositories.EventRepository;
-import by.telegram.monitoring.bot.services.EventsService;
+import by.telegram.monitoring.bot.entities.Day;
+import by.telegram.monitoring.bot.repositories.DayRepository;
+import by.telegram.monitoring.bot.services.DayService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,15 @@ import static by.telegram.monitoring.bot.utils.constants.PagesPathConstants.HOME
 @Slf4j
 @AllArgsConstructor
 @Service
-public class EventsServiceImpl implements EventsService {
-
+public class DaysServiceImpl implements DayService {
     @Autowired
-    private EventRepository eventRepository;
+    private DayRepository dayRepository;
 
     @Override
-    public ModelAndView getAllEvents() {
+    public ModelAndView getAllDays() {
         ModelMap modelMap = new ModelMap();
-        List<Event> allEvents = eventRepository.findAll();
-        modelMap.addAttribute("events", allEvents);
+        List<Day> allDays = dayRepository.findAll();
+        modelMap.addAttribute("days", allDays);
         return new ModelAndView(HOME_PAGE, modelMap);
     }
 }

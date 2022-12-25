@@ -373,12 +373,11 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
         JSONObject path = jsonObject.getJSONObject("result");
         String filePath = path.getString("file_path");
 
-        File localFile = new File("src/main/resources/uploadedFiles/" + fileName);
+        File localFile = new File("src/main/resources/static/img/" + fileName);
         InputStream inputStream = new URL("https://api.telegram.org/file/bot" + botToken + "/" + filePath).openStream();
 
         FileUtils.copyInputStreamToFile(inputStream, localFile);
-
-        return localFile.getPath();
+        return localFile.getPath().replace("\\", "/");
     }
 
     private void createGeneralStaticKeyboard(Message message) throws TelegramApiException {
