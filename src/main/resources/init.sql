@@ -62,3 +62,11 @@ insert into bot_monitoring.users (serial_number, password, name, surname, role_i
            'Елисеев',
           1
     );
+insert into bot_monitoring.users (serial_number, password, name, surname, role_id)
+    value (
+           56856,
+           '$2a$08$xJI6QJL5Wh8uKaK.HbQ7e.4Gd5y/k3Q6nbkx9TQU3vMhFNY30/jr.',
+           'Антон',
+           'Овсейчик',
+           1
+    );

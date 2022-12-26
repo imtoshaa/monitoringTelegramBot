@@ -121,8 +121,8 @@ public class MonitoringTelegramBot extends TelegramLongPollingBot {
                                 .text("""
                                         Вас приветствует телеграм-бот.
                                         Для взаимодействия с ботом Вы можете использовать следующие команды:
-                                        /connect - Привязать бот к аккаунту
-                                        /help - Помощь
+                                        /registration *табельный номер* *желаемый пароль* - Привязать бот к аккаунту
+                                        Для перехода на сайт проекта откройте в браузере ссылку https://botmikashevichi.herokuapp.com/home
                                         """)
                                 .build());
                     }
