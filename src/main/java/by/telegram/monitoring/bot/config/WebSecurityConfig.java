@@ -28,8 +28,8 @@ public class WebSecurityConfig {
                 auth
                     .antMatchers("/registration").not().fullyAuthenticated() //если залогинился, то регистрация не будет доступна
                     .antMatchers("/resources/**", "/").permitAll() //даём разрешение доступа к ресурсам всем
-                    .antMatchers("/cart/confirmOrder", "/mypage", "/home").authenticated() //доступ только тем, кто залогинился
-                    .antMatchers("/admins/**").hasAuthority(ROLE_ADMIN) //доступ только админам
+                    .antMatchers("/mypage", "/home").authenticated() //доступ только тем, кто залогинился
+                    .antMatchers("/admin/**").hasAuthority(ROLE_ADMIN) //доступ только админам
 
                     .and()
 
