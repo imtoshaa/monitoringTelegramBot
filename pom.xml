@@ -15,7 +15,7 @@
 	<name>MikashevichiBot</name>
 	<description>Monitoring Mikashevichi Service</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<!--Spring boot dependencies-->
@@ -163,15 +163,11 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>19</source>
-					<target>19</target>
-				</configuration>
-			</plugin>
+				<plugin>
+					<groupId>com.heroku.sdk</groupId>
+					<artifactId>heroku-maven-plugin</artifactId>
+					<version>3.0.6</version>
+				</plugin>
 		</plugins>
 	</build>
 
